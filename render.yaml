@@ -1,10 +1,9 @@
 services:
   - type: web
     name: operaciones-microfrontend
-    env: static
+    env: node
     buildCommand: npm install
-    startCommand: npx serve -s . -l $PORT
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-    staticPublishPath: .
