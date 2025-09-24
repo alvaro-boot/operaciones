@@ -4,8 +4,8 @@
   "description": "Micro frontend para gestión de operaciones industriales",
   "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8080",
-    "dev": "python -m http.server 8080",
+    "start": "node server.js",
+    "dev": "npx serve -s . -l 8080",
     "build": "echo 'Build completed - static files ready'",
     "serve": "npx serve -s . -l 8080"
   },
@@ -19,8 +19,9 @@
   ],
   "author": "Sistema de Operaciones",
   "license": "MIT",
-  "devDependencies": {
-    "serve": "^14.2.1"
+  "dependencies": {
+    "serve": "^14.2.1",
+    "express": "^4.18.2"
   },
   "engines": {
     "node": ">=14.0.0"
