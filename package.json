@@ -2,9 +2,9 @@
   "name": "operaciones-microfrontend",
   "version": "1.0.0",
   "description": "Micro frontend para gestión de operaciones industriales",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "start": "node index.js",
+    "start": "npx serve -s . -l $PORT",
     "dev": "npx serve -s . -l 8080",
     "build": "echo 'Build completed - static files ready'",
     "serve": "npx serve -s . -l 8080"
