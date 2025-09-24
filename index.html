@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Frontend - Operaciones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="operaciones-app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-cogs"></i> Operaciones</h1>
+                <div class="user-info">
+                    <span class="user-name">Usuario Operaciones</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </button>
+            <button class="nav-tab" data-tab="inventario">
+                <i class="fas fa-boxes"></i>
+                Inventario
+            </button>
+            <button class="nav-tab" data-tab="logistica">
+                <i class="fas fa-truck"></i>
+                Logística
+            </button>
+            <button class="nav-tab" data-tab="produccion">
+                <i class="fas fa-industry"></i>
+                Producción
+            </button>
+            <button class="nav-tab" data-tab="calidad">
+                <i class="fas fa-check-circle"></i>
+                Control de Calidad
+            </button>
+            <button class="nav-tab" data-tab="mantenimiento">
+                <i class="fas fa-wrench"></i>
+                Mantenimiento
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Métricas Generales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="metric">
+                                <span class="metric-value">95%</span>
+                                <span class="metric-label">Eficiencia</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">1,247</span>
+                                <span class="metric-label">Productos Procesados</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">23</span>
+                                <span class="metric-label">Órdenes Activas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> Estado en Tiempo Real</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="status-item">
+                                <span class="status-dot running"></span>
+                                <span>Línea de Producción A</span>
+                                <span class="status-text">En Operación</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-dot running"></span>
+                                <span>Línea de Producción B</span>
+                                <span class="status-text">En Operación</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-dot maintenance"></span>
+                                <span>Línea de Producción C</span>
+                                <span class="status-text">Mantenimiento</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Alertas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert-item warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Stock bajo en Material A</span>
+                            </div>
+                            <div class="alert-item info">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Mantenimiento programado para mañana</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventario Tab -->
+            <div id="inventario" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-boxes"></i> Gestión de Inventario</h2>
+                    <button class="btn btn-primary" onclick="showAddItemModal()">
+                        <i class="fas fa-plus"></i> Agregar Item
+                    </button>
+                </div>
+
+                <div class="inventory-filters">
+                    <input type="text" id="search-inventory" placeholder="Buscar en inventario..." class="search-input">
+                    <select id="category-filter" class="filter-select">
+                        <option value="">Todas las categorías</option>
+                        <option value="materia-prima">Materia Prima</option>
+                        <option value="producto-terminado">Producto Terminado</option>
+                        <option value="herramientas">Herramientas</option>
+                        <option value="equipos">Equipos</option>
+                    </select>
+                </div>
+
+                <div class="inventory-table-container">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Stock Actual</th>
+                                <th>Stock Mínimo</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-tbody">
+                            <!-- Los datos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Logística Tab -->
+            <div id="logistica" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-truck"></i> Gestión Logística</h2>
+                    <button class="btn btn-primary" onclick="showAddShipmentModal()">
+                        <i class="fas fa-plus"></i> Nueva Entrega
+                    </button>
+                </div>
+
+                <div class="logistics-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-shipping-fast"></i> Entregas Pendientes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="shipment-item">
+                                <div class="shipment-info">
+                                    <span class="shipment-id">#ENT-001</span>
+                                    <span class="shipment-destination">Cliente A - Zona Norte</span>
+                                </div>
+                                <div class="shipment-status pending">Pendiente</div>
+                            </div>
+                            <div class="shipment-item">
+                                <div class="shipment-info">
+                                    <span class="shipment-id">#ENT-002</span>
+                                    <span class="shipment-destination">Cliente B - Zona Sur</span>
+                                </div>
+                                <div class="shipment-status in-transit">En Tránsito</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-route"></i> Rutas de Entrega</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-item">
+                                <span class="route-name">Ruta Norte</span>
+                                <span class="route-stops">8 paradas</span>
+                            </div>
+                            <div class="route-item">
+                                <span class="route-name">Ruta Sur</span>
+                                <span class="route-stops">12 paradas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producción Tab -->
+            <div id="produccion" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-industry"></i> Control de Producción</h2>
+                    <button class="btn btn-primary" onclick="showAddOrderModal()">
+                        <i class="fas fa-plus"></i> Nueva Orden
+                    </button>
+                </div>
+
+                <div class="production-lines">
+                    <div class="production-line">
+                        <div class="line-header">
+                            <h3>Línea de Producción A</h3>
+                            <div class="line-status running">En Operación</div>
+                        </div>
+                        <div class="line-metrics">
+                            <div class="metric">
+                                <span class="metric-value">150</span>
+                                <span class="metric-label">Unidades/Hora</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">85%</span>
+                                <span class="metric-label">Eficiencia</span>
+                            </div>
+                        </div>
+                        <div class="current-order">
+                            <span>Orden Actual: #ORD-001</span>
+                            <span>Producto: Widget A</span>
+                            <span>Progreso: 75%</span>
+                        </div>
+                    </div>
+
+                    <div class="production-line">
+                        <div class="line-header">
+                            <h3>Línea de Producción B</h3>
+                            <div class="line-status running">En Operación</div>
+                        </div>
+                        <div class="line-metrics">
+                            <div class="metric">
+                                <span class="metric-value">200</span>
+                                <span class="metric-label">Unidades/Hora</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">92%</span>
+                                <span class="metric-label">Eficiencia</span>
+                            </div>
+                        </div>
+                        <div class="current-order">
+                            <span>Orden Actual: #ORD-002</span>
+                            <span>Producto: Widget B</span>
+                            <span>Progreso: 45%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control de Calidad Tab -->
+            <div id="calidad" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-check-circle"></i> Control de Calidad</h2>
+                </div>
+
+                <div class="quality-metrics">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-pie"></i> Métricas de Calidad</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="quality-metric">
+                                <span class="metric-value">98.5%</span>
+                                <span class="metric-label">Tasa de Aprobación</span>
+                            </div>
+                            <div class="quality-metric">
+                                <span class="metric-value">12</span>
+                                <span class="metric-label">Inspecciones Hoy</span>
+                            </div>
+                            <div class="quality-metric">
+                                <span class="metric-value">2</span>
+                                <span class="metric-label">Rechazos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-clipboard-check"></i> Inspecciones Recientes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="inspection-item approved">
+                                <span class="inspection-id">#INS-001</span>
+                                <span class="inspection-product">Widget A</span>
+                                <span class="inspection-status">Aprobado</span>
+                            </div>
+                            <div class="inspection-item rejected">
+                                <span class="inspection-id">#INS-002</span>
+                                <span class="inspection-product">Widget B</span>
+                                <span class="inspection-status">Rechazado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mantenimiento Tab -->
+            <div id="mantenimiento" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-wrench"></i> Gestión de Mantenimiento</h2>
+                    <button class="btn btn-primary" onclick="showAddMaintenanceModal()">
+                        <i class="fas fa-plus"></i> Programar Mantenimiento
+                    </button>
+                </div>
+
+                <div class="maintenance-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Mantenimientos Programados</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="maintenance-item">
+                                <span class="maintenance-equipment">Línea A - Motor Principal</span>
+                                <span class="maintenance-date">2024-01-15</span>
+                                <span class="maintenance-type">Preventivo</span>
+                            </div>
+                            <div class="maintenance-item">
+                                <span class="maintenance-equipment">Línea B - Sistema Hidráulico</span>
+                                <span class="maintenance-date">2024-01-20</span>
+                                <span class="maintenance-type">Correctivo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-tools"></i> Equipos en Mantenimiento</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="equipment-status">
+                                <span class="equipment-name">Línea C</span>
+                                <span class="equipment-status-text maintenance">En Mantenimiento</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modales -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Título del Modal</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Contenido del modal se carga dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

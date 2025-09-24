@@ -1,0 +1,33 @@
+{
+  "name": "operaciones-microfrontend",
+  "version": "1.0.0",
+  "description": "Micro frontend para gestión de operaciones industriales",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "dev": "python -m http.server 8080",
+    "build": "echo 'Build completed - static files ready'",
+    "serve": "npx serve -s . -l 8080"
+  },
+  "keywords": [
+    "microfrontend",
+    "operaciones",
+    "industria",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "Sistema de Operaciones",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/empresa/operaciones-microfrontend.git"
+  },
+  "homepage": "https://github.com/empresa/operaciones-microfrontend#readme"
+}
