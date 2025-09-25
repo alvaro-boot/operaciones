@@ -158,9 +158,14 @@
             <div id="logistica" class="tab-content">
                 <div class="section-header">
                     <h2><i class="fas fa-truck"></i> Gestión Logística</h2>
-                    <button class="btn btn-primary" onclick="showAddShipmentModal()">
-                        <i class="fas fa-plus"></i> Nueva Entrega
-                    </button>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-secondary" onclick="goToTiTickets()">
+                            <i class="fas fa-ticket-alt"></i> Tickets TI
+                        </button>
+                        <button class="btn btn-primary" onclick="showAddShipmentModal()">
+                            <i class="fas fa-plus"></i> Nueva Entrega
+                        </button>
+                    </div>
                 </div>
 
                 <div class="logistics-grid">

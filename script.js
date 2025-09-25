@@ -42,6 +42,21 @@ document.addEventListener('DOMContentLoaded', function() {
     startRealTimeUpdates();
 });
 
+// Navegar a Tickets en el micro de TI a través del root (postMessage)
+function goToTiTickets() {
+    try {
+        window.parent?.postMessage({
+            type: 'navigate',
+            module: 'it',
+            path: '/tickets'
+        }, '*');
+        showNotification('Abriendo Tickets de TI...', 'info');
+    } catch (e) {
+        console.error('No se pudo enviar la navegación a TI/Tickets', e);
+        showNotification('No se pudo abrir Tickets de TI', 'error');
+    }
+}
+
 // Configurar event listeners
 function setupEventListeners() {
     // Navegación por tabs
@@ -726,6 +741,7 @@ window.showAddMaintenanceModal = showAddMaintenanceModal;
 window.closeModal = closeModal;
 window.editInventoryItem = editInventoryItem;
 window.deleteInventoryItem = deleteInventoryItem;
+window.goToTiTickets = goToTiTickets;
 
 // Agregar estilos CSS para animaciones de notificaciones
 const style = document.createElement('style');
