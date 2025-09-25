@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
     loadInventoryData();
     setupEventListeners();
     startRealTimeUpdates();
+    // Seleccionar pestaña según la ruta actual
+    applyPathToTab();
 });
 
 // Navegar a Tickets en el micro de TI a través del root (postMessage)
@@ -54,6 +56,29 @@ function goToTiTickets() {
     } catch (e) {
         console.error('No se pudo enviar la navegación a TI/Tickets', e);
         showNotification('No se pudo abrir Tickets de TI', 'error');
+    }
+}
+
+// Seleccionar tab en base a window.location.pathname
+function applyPathToTab() {
+    try {
+        const path = (window.location && window.location.pathname) ? window.location.pathname : '/';
+        const segment = path.split('/')[1] || '';
+        const map = {
+            '': 'dashboard',
+            'dashboard': 'dashboard',
+            'inventario': 'inventario',
+            'logistica': 'logistica',
+            'produccion': 'produccion',
+            'calidad': 'calidad',
+            'mantenimiento': 'mantenimiento',
+        };
+        const targetTab = map[segment];
+        if (targetTab) {
+            switchTab(targetTab);
+        }
+    } catch (e) {
+        console.warn('No se pudo aplicar la ruta al tab:', e);
     }
 }
 
@@ -742,6 +767,8 @@ window.closeModal = closeModal;
 window.editInventoryItem = editInventoryItem;
 window.deleteInventoryItem = deleteInventoryItem;
 window.goToTiTickets = goToTiTickets;
+// Exponer para debugging si se requiere
+window.applyPathToTab = applyPathToTab;
 
 // Agregar estilos CSS para animaciones de notificaciones
 const style = document.createElement('style');
